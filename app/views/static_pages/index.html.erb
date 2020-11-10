@@ -1,3 +1,43 @@
 <div class="section">
-  <h2 class="title is-2">Welcome to my Flickr API</h2>
+  <div class="columns is-centered">
+    <div class="column is-half has-text-centered" style='border:solid black 1px'>
+      <h2 class="title is-2">Welcome to my Flickr API</h2>
+      <%= simple_form_for(:search, method: 'get') do |f|%>
+      <%= f.error_notification %>
+
+      <div class="field">
+        <div class="control" style='display:flex'>
+          <%= f.input :user,
+                input_html: { class: 'input', value: '' },
+                wrapper: false,
+                required: false,
+                label_html: { class: 'label', style:'margin:auto; margin-right:15px' } %>
+        </div>
+      </div>
+
+      <%= f.submit 'Search' %>
+
+      <% end %>
+    </div>
+
+    <div class="column is-half" style='border:solid black 1px'>
+      <div class="section">
+        <div class="container">
+          <% unless @user.nil? %>
+            <p>
+              <%= @user.realname %>
+            </p>
+            <ol>
+              <% @photos.each do |photo| %>
+                <li>
+                  <%= photo.title %>
+                </li>
+              <% end %>
+            </ol>
+          <% end %>
+          <%= image_tag(@url[:link]) %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
